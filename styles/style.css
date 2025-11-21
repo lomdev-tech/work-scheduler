@@ -404,6 +404,38 @@ body {
     color: var(--text-tertiary);
 }
 
+/* ========== 页脚 ========== */
+.footer {
+    max-width: 1400px;
+    margin: var(--spacing-xl) auto var(--spacing-2xl);
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.footer-links {
+    margin-top: var(--spacing-xs);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.footer-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-links .divider {
+    color: var(--border-color);
+}
+
 /* ========== 浮动添加按钮 (FAB) ========== */
 .fab {
     position: fixed;
