@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作日程安排程序 | Work Scheduler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <h1 class="navbar-title">
+                <span class="icon">📅</span>
+                工作日程安排
+            </h1>
+            <nav class="navbar-nav">
+                <button class="nav-btn active" data-view="today">今日</button>
+                <button class="nav-btn" data-view="week">本周</button>
+                <button class="nav-btn" data-view="all">全部</button>
+                <button class="nav-btn" id="exportBtn">导出</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主容器 -->
+    <main class="main-container">
+        <!-- 左侧日期选择栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>日期选择</h2>
+            </div>
+            <div class="date-picker">
+                <input type="date" id="dateFilter" class="date-input">
+            </div>
+            <div class="quick-filters">
+                <button class="quick-filter-btn" data-filter="today">今天</button>
+                <button class="quick-filter-btn" data-filter="tomorrow">明天</button>
+                <button class="quick-filter-btn" data-filter="week">本周</button>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <section class="content-area">
+            <div class="content-header">
+                <h2 id="viewTitle">今日日程</h2>
+                <div class="stats">
+                    <span class="stat-item">
+                        <span class="stat-label">总计:</span>
+                        <span class="stat-value" id="totalCount">0</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">冲突:</span>
+                        <span class="stat-value conflict" id="conflictCount">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 任务列表容器 -->
+            <div class="tasks-container" id="tasksContainer">
+                <!-- 任务卡片将通过 JavaScript 动态生成 -->
+            </div>
+
+            <!-- 空状态 -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">📋</div>
+                <p class="empty-text">暂无日程安排</p>
+                <p class="empty-hint">点击右下角按钮添加新日程</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 浮动添加按钮 (FAB) -->
+    <button class="fab" id="addTaskBtn" aria-label="添加新日程">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </button>
+
+    <!-- 模态弹窗 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">新增日程</h3>
+                <button class="modal-close" id="modalClose" aria-label="关闭">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" id="taskForm">
+                <input type="hidden" id="taskId">
+                
+                <div class="form-group">
+                    <label for="taskName" class="form-label">任务名称 *</label>
+                    <input type="text" id="taskName" class="form-input" placeholder="输入任务名称" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskDate" class="form-label">日期 *</label>
+                        <input type="date" id="taskDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskPriority" class="form-label">优先级 *</label>
+                        <select id="taskPriority" class="form-input" required>
+                            <option value="P1">P1 - 高优先级</option>
+                            <option value="P2" selected>P2 - 中优先级</option>
+                            <option value="P3">P3 - 低优先级</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startTime" class="form-label">开始时间 *</label>
+                        <input type="time" id="startTime" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime" class="form-label">结束时间 *</label>
+                        <input type="time" id="endTime" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDescription" class="form-label">备注</label>
+                    <textarea id="taskDescription" class="form-input form-textarea" rows="3" placeholder="添加备注信息（可选）"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 导出菜单 -->
+    <div class="export-menu" id="exportMenu" style="display: none;">
+        <button class="export-option" data-format="json">导出为 JSON</button>
+        <button class="export-option" data-format="markdown">导出为 Markdown</button>
+    </div>
+
+    <!-- 脚本模块 -->
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
+

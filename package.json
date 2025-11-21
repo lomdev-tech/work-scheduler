@@ -1,0 +1,24 @@
+{
+  "name": "work-scheduler",
+  "version": "1.0.0",
+  "description": "高颜值、现代化、响应式的 Web 版工作日程安排程序",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "scheduler",
+    "calendar",
+    "task-manager",
+    "work-plan",
+    "日程安排"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
+

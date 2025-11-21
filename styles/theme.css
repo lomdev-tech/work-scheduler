@@ -1,0 +1,96 @@
+/**
+ * 主题配色与设计令牌
+ * Theme Colors & Design Tokens
+ */
+
+:root {
+    /* 主色调 - 渐变紫蓝色系 */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-gradient-hover: linear-gradient(135deg, #5568d3 0%, #653a8f 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    
+    /* 背景色 */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #f1f3f5;
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+    --bg-modal: rgba(255, 255, 255, 0.95);
+    
+    /* 文字颜色 */
+    --text-primary: #1a1a1a;
+    --text-secondary: #6c757d;
+    --text-tertiary: #adb5bd;
+    --text-inverse: #ffffff;
+    
+    /* 边框与分割线 */
+    --border-color: #e9ecef;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 24px;
+    
+    /* 阴影 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 12px 32px rgba(102, 126, 234, 0.25);
+    
+    /* 优先级颜色 */
+    --priority-p1: #ff6b6b;
+    --priority-p1-bg: #ffe0e0;
+    --priority-p2: #4ecdc4;
+    --priority-p2-bg: #e0f7f5;
+    --priority-p3: #95e1d3;
+    --priority-p3-bg: #f0faf8;
+    
+    /* 状态颜色 */
+    --success: #51cf66;
+    --warning: #ffd43b;
+    --error: #ff6b6b;
+    --info: #74c0fc;
+    
+    /* 间距 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* 字体 */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 32px;
+    
+    /* 过渡动画 */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Z-index 层级 */
+    --z-navbar: 100;
+    --z-sidebar: 90;
+    --z-fab: 200;
+    --z-modal: 300;
+    --z-export-menu: 250;
+}
+
+/* 深色模式支持（预留） */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --bg-tertiary: #3a3a3a;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --text-tertiary: #808080;
+        --border-color: #404040;
+    }
+}
+
